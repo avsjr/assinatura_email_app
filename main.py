@@ -15,7 +15,7 @@ for palavra in palavras:
     # abir a imagem para edição
     draw = ImageDraw.Draw(imagem)
     # escolher fonte
-    font = ImageFont.truetype('arial.ttf',20)
+    font = ImageFont.truetype('arial.ttf',15)
     draw.text((215,29),palavra,fill =(0,0,0),font=font,)
     # salvar a imagem modificada
     imagem.save(f'imagem{contador}.jpg')
