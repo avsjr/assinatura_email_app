@@ -5,6 +5,15 @@ from PIL import ImageDraw
 # Escolher a fonte do texto
 from PIL import ImageFont
 
+from tkinter import *
+
+
+# escolher qual unidade de negócio
+unidades = ['Masterline', 'Platina Log', 'Platina CSC']
+user_input = ''
+unidade_negocio = "Escolha a unidade do Grupo Skala"
+
+
 # Quais palavras colocar
 palavras = ['Antonio Vicente']
 
