@@ -31,7 +31,6 @@ icone_tk = ImageTk.PhotoImage(icone) # Converter o ícone para o formato do tkin
 # Adicionar uma borda ao ícone
 borda_size = 2  # Tamanho da borda em pixels
 borda_cor = (162,205,90)  # Cor da borda (vermelho no exemplo)
-#borda_radius = 10  # Raio da borda em pixels
 icone_com_borda = ImageOps.expand(icone, border=borda_size, fill=borda_cor)
 
 # Converter o ícone para o formato do tkinter
@@ -62,12 +61,6 @@ opcoes_menu['menu'].configure(
     bg='white',           # Define a cor de fundo do menu suspenso
     relief='flat',        # Define o estilo de borda (por exemplo, 'flat', 'raised', 'sunken')
 )
-
-'''
-# Criar a área de texto
-texto = tk.Text(janela, height=10, width=50)
-texto.pack()
-'''
 
 # Criar o botão de seleção
 botao_selecionar = tk.Button(janela, text='Ok', command=selecionar_opcao)
@@ -121,8 +114,14 @@ def adicionar_texto():
 botao_adicionar = tk.Button(janela, text='Adicionar', command=adicionar_texto)
 botao_adicionar.pack(pady=10)
 
+'''
+contador = 1
+# salvar a imagem modificada
+imagem.save(f'imagem{contador}.jpg')
+contador += 1
 
-#### Criar botão nova assinatura
+#Criar botão nova assinatura
+'''
 # Criar o rótulo para a imagem
 label_imagem = tk.Label(janela)
 label_imagem.pack()
