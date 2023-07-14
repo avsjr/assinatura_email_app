@@ -1,12 +1,12 @@
 import tkinter as tk
 from tkinter import *
-from PIL import Image, ImageTk, ImageDraw, ImageFont
+from PIL import Image, ImageTk, ImageDraw, ImageFont, ImageOps
 
 # Dicionário de opções e imagens correspondentes
 opcoes = {
-    'Platina CSC': 'img/01-platina.png',
-    'Platina LOG': 'img/01-platina.png',
-    'Masterline': 'img/02-masterline.png'
+    'Platina CSC': 'img/02-platina.png',
+    'Platina LOG': 'img/02-platina.png',
+    'Masterline': 'img/01-masterline.png'
 }
 
 # Função para selecionar a opção do dropdown
@@ -28,6 +28,14 @@ janela.configure(bg='white')   # Define a cor de fundo da janela como branco
 icone = Image.open('img/skala.png')
 icone = icone.resize((32, 32))       # Redimensionar o ícone conforme necessário
 icone_tk = ImageTk.PhotoImage(icone) # Converter o ícone para o formato do tkinter
+# Adicionar uma borda ao ícone
+borda_size = 2  # Tamanho da borda em pixels
+borda_cor = (162,205,90)  # Cor da borda (vermelho no exemplo)
+#borda_radius = 10  # Raio da borda em pixels
+icone_com_borda = ImageOps.expand(icone, border=borda_size, fill=borda_cor)
+
+# Converter o ícone para o formato do tkinter
+icone_tk = ImageTk.PhotoImage(icone_com_borda)
 janela.iconphoto(True, icone_tk)     # Definir o ícone da janela
 
 # Criar o dropdown
@@ -92,14 +100,14 @@ def adicionar_texto():
     texto = texto_inserido
 
     # Definir a fonte e o tamanho do texto
-    tamanho_fonte = 30
+    tamanho_fonte = 15
     fonte = ImageFont.truetype('fonts/arial.ttf', tamanho_fonte)
 
     # Definir a posição do texto na imagem
-    posicao_texto = (50, 50)  # exemplo: posição (50, 50)
+    posicao_texto = (211, 27)  # exemplo: posição (50, 50)
 
     # Definir a cor do texto
-    cor_texto = (69,139,116)  # exemplo: branco (RGB)
+    cor_texto = (162,205,90) # exemplo: branco (RGB)
 
     # Desenhar o texto na imagem
     desenho.text(posicao_texto, texto, font=fonte, fill=cor_texto)
