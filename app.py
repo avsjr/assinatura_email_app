@@ -78,7 +78,6 @@ botao_selecionar.configure(          # Define as propriedades do botão
 campo_texto = tk.Entry(janela, font=('Arial', 12), width=30)
 campo_texto.pack(pady=10)  # Adicionar preenchimento vertical ao campo de entrada
 
-
 def adicionar_texto():
     texto_inserido = campo_texto.get()  # Obter o texto inserido pelo usuário
 
@@ -86,25 +85,38 @@ def adicionar_texto():
     caminho_imagem = opcoes[dropdown.get()]  # Obter o caminho da imagem selecionada
     imagem = Image.open(caminho_imagem)
     
-    desenho = ImageDraw.Draw(imagem) # Criar uma instância de ImageDraw para desenhar na imagem
-  
+    desenho_texto = ImageDraw.Draw(imagem) # Criar uma instância de ImageDraw para desenhar na imagem
+    desenho_endereco = ImageDraw.Draw(imagem)
+    
     texto = texto_inserido # Definir o texto a ser adicionado
-
+    endereco_platina = 'Comercial Ilhas do Sol\nRua Coronel Antonio Rios, 1097 - Salas 201 a 208\nUberaba/MG'
+    endereco_masterline = 'Rua Verissímo, 265\nSão Benedito - Uberaba/MG\nCEP: 38020-310'
+    
     # Definir a fonte e o tamanho do texto
     tamanho_fonte = 15
-    fonte = ImageFont.truetype('fonts/arial.ttf', tamanho_fonte)
     
+    fonte_texto = ImageFont.truetype('fonts/arial.ttf', tamanho_fonte)
+    fonte_endereco = ImageFont.truetype('fonts/arial.ttf', tamanho_fonte)
+    # Definir a cor do texto
+    cor_texto = (162,205,90) # exemplo: branco (RGB)
+    cor_endereco = (3,3,3)
+    
+    if caminho_imagem == 'img/01-masterline.png':
+        posicao_endereco = (210, 126)  # Definir a posição do endereço masterline
+        desenho_endereco.text(posicao_endereco, endereco_masterline, font=fonte_endereco, fill=cor_endereco)
+        
+    else:
+        posicao_endereco = (192, 126)  # Definir a posição do endereço platina
+        desenho_endereco.text(posicao_endereco, endereco_platina, font=fonte_endereco, fill=cor_endereco)
+          
     # condição para a posição do texto
     if caminho_imagem == 'img/01-masterline.png':
         posicao_texto = (210, 27)  # Definir a posição do texto na imagem
     else:
         posicao_texto = (192, 27)  # Definir a posição do texto na imagem
 
-    # Definir a cor do texto
-    cor_texto = (162,205,90) # exemplo: branco (RGB)
-
-    # Desenhar o texto na imagem
-    desenho.text(posicao_texto, texto, font=fonte, fill=cor_texto)
+        # Desenhar o texto na imagem
+    desenho_texto.text(posicao_texto, texto, font=fonte_texto, fill=cor_texto)
 
     # Atualizar a imagem exibida no rótulo label_imagem
     imagem_tk = ImageTk.PhotoImage(imagem)
