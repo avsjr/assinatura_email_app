@@ -85,19 +85,20 @@ def adicionar_texto():
     # Carregar a imagem
     caminho_imagem = opcoes[dropdown.get()]  # Obter o caminho da imagem selecionada
     imagem = Image.open(caminho_imagem)
-
-    # Criar uma instância de ImageDraw para desenhar na imagem
-    desenho = ImageDraw.Draw(imagem)
-
-    # Definir o texto a ser adicionado
-    texto = texto_inserido
+    
+    desenho = ImageDraw.Draw(imagem) # Criar uma instância de ImageDraw para desenhar na imagem
+  
+    texto = texto_inserido # Definir o texto a ser adicionado
 
     # Definir a fonte e o tamanho do texto
     tamanho_fonte = 15
     fonte = ImageFont.truetype('fonts/arial.ttf', tamanho_fonte)
-
-    # Definir a posição do texto na imagem
-    posicao_texto = (211, 27)  # exemplo: posição (50, 50)
+    
+    # condição para a posição do texto
+    if caminho_imagem == 'img/01-masterline.png':
+        posicao_texto = (210, 27)  # Definir a posição do texto na imagem
+    else:
+        posicao_texto = (192, 27)  # Definir a posição do texto na imagem
 
     # Definir a cor do texto
     cor_texto = (162,205,90) # exemplo: branco (RGB)
