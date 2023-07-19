@@ -1,5 +1,5 @@
 import tkinter as tk
-from tkinter import *
+from tkinter import filedialog
 from PIL import Image, ImageTk, ImageDraw, ImageFont, ImageOps
 
 # Dicionário de opções e imagens correspondentes
@@ -11,6 +11,7 @@ opcoes = {
 
 # Função para selecionar a opção do dropdown
 def selecionar_opcao():
+    global imagem
     opcao_selecionada = dropdown.get()
     caminho_imagem = opcoes[opcao_selecionada]
     imagem = Image.open(caminho_imagem)
@@ -156,7 +157,7 @@ def adicionar_texto():
         desenho.text(posicao_telefone, texto_telefone, font=fonte_atributos, fill=cor_email_telefone)
 
     # Atualizar a imagem exibida no rótulo label_imagem
-    global imagem
+    
     imagem_tk = ImageTk.PhotoImage(imagem)
     label_imagem.configure(image=imagem_tk)
     label_imagem.image = imagem_tk
@@ -173,14 +174,20 @@ botao_adicionar.configure(          # Define as propriedades do botão
     width=6                          # Define a largura do dropdown em caracteres
 )    
 
-contador = 1
 
 def salvar_imagem():
         global contador, imagem
-        imagem.save(f'imagem{contador}.jpg')
-        contador += 1
-        print("Imagem salva com sucesso!")
+        # Converter a imagem para o modo RGB
+        imagem = imagem.convert("RGB")
         
+        # Abrir o diálogo de seleção de diretório
+        diretorio = filedialog.asksaveasfilename(defaultextension=".jpg")
+    
+        if diretorio:
+        # Salvar a imagem modificada no diretório selecionado
+            imagem.save(diretorio)
+            print("Imagem salva com sucesso!")
+
 # Criar botão salvar imagem
 botao_salvar = tk.Button(janela, text="Salvar Imagem", command=salvar_imagem)
 botao_salvar.pack(side='bottom',padx=7, pady=7)
@@ -191,7 +198,6 @@ botao_salvar.configure(
     relief='flat',        # Define o estilo de borda (por exemplo, 'flat', 'raised', 'sunken')
     width=10              # Define a largura do dropdown em caracteres)
 ) 
-
 
 #Criar botão nova assinatura
 
