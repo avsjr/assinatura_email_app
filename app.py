@@ -1,5 +1,7 @@
 import tkinter as tk
-from tkinter import filedialog
+import os
+import win32com.client
+from tkinter import filedialog, messagebox
 from PIL import Image, ImageTk, ImageDraw, ImageFont, ImageOps
 
 # Dicionário de opções e imagens correspondentes
@@ -24,11 +26,29 @@ janela = tk.Tk()
 janela.title('Assinaturas')    # Define o título da janela
 janela.geometry('700x700')     # Define o tamanho da janela
 janela.configure(bg='white')   # Define a cor de fundo da janela como branco
+janela.iconbitmap('img/skala.ico')  # Define o ícone da janela
+
+'''
+# Função para criar o atalho e definir o ícone
+def criar_atalho():
+    caminho_icone = "img/skala.ico"  # Substitua pelo caminho real para o arquivo .ico
+
+    # Criação do atalho
+    shell = win32com.client.Dispatch("WScript.Shell")
+    atalho = shell.CreateShortCut("atalho.lnk")
+    atalho.Targetpath = os.path.abspath("caminho_para_seu_aplicativo.exe")  # Substitua pelo caminho real para o seu aplicativo .exe
+    atalho.IconLocation = caminho_icone
+    atalho.save()
+
+# Chamar a função para criar o atalho e definir o ícone
+criar_atalho()
+'''
 
 # Carregar a imagem do ícone e convertê-la para o formato adequado
-icone = Image.open('img/skala.png')
+icone = Image.open('img/skala.ico')
 icone = icone.resize((32, 32))       # Redimensionar o ícone conforme necessário
 icone_tk = ImageTk.PhotoImage(icone) # Converter o ícone para o formato do tkinter
+
 # Adicionar uma borda ao ícone
 borda_size = 2  # Tamanho da borda em pixels
 borda_cor = (162,205,90)  # Cor da borda (vermelho no exemplo)
@@ -48,55 +68,55 @@ opcoes_menu = tk.OptionMenu(janela, dropdown, *opcoes.keys())
 # Definir as propriedades do dropdown
 opcoes_menu.pack(side='top', padx=7, pady=7)
 opcoes_menu.configure(
-    font=('Arial', 12),   # Define a fonte
+    font=('Arial', 11),   # Define a fonte
     fg='black',           # Define a cor do texto
     bg='white',           # Define a cor de fundo
-    relief='flat',        # Define o estilo de borda (por exemplo, 'flat', 'raised', 'sunken')
+    relief='ridge',        # Define o estilo de borda (por exemplo, 'flat', 'raised', 'sunken')
     width=15              # Define a largura do dropdown em caracteres
 )
 
 # Definir as propriedades do menu suspenso
 opcoes_menu['menu'].configure(
-    font=('Arial', 12),   # Define a fonte do menu suspenso
+    font=('Arial', 11),   # Define a fonte do menu suspenso
     fg='black',           # Define a cor do texto no menu suspenso
     bg='white',           # Define a cor de fundo do menu suspenso
-    relief='flat',        # Define o estilo de borda (por exemplo, 'flat', 'raised', 'sunken')
+    relief='ridge',        # Define o estilo de borda (por exemplo, 'flat', 'raised', 'sunken')
 )
 
 # Criar o botão de seleção
 botao_selecionar = tk.Button(janela, text='OK', command=selecionar_opcao)
-#botao_selecionar.pack(side='top', padx=0, pady=0)
 botao_selecionar.place(x=450, y=8)  # Define a posição do botão na janela
 botao_selecionar.configure(          # Define as propriedades do botão
-    font=('Arial', 12),              # Define a fonte
+    font=('Arial', 11),              # Define a fonte
     fg='black',                      # Define a cor do texto
     bg='white',                      # Define a cor de fundo
-    relief='flat',                   # Define o estilo de borda (por exemplo, 'flat', 'raised', 'sunken')
+    relief='ridge',                   # Define o estilo de borda (por exemplo, 'flat', 'raised', 'sunken')
     width=2                          # Define a largura do dropdown em caracteres
 )
 
 # Criar o campo de entrada de texto
 rotulo_instrucao = tk.Label(janela, text="Nome", font=('Arial', 11), bg="white")
 rotulo_instrucao.pack()
-campo_nome = tk.Entry(janela, font=('Arial', 12), width=30)
+campo_nome = tk.Entry(janela, font=('Arial', 11), width=40, bg='white', fg='black', bd=2, relief='ridge')
 campo_nome.pack(pady=10)  # Adicionar preenchimento vertical ao campo de entrada
 
 rotulo_instrucao = tk.Label(janela, text="Cargo", font=('Arial', 11), bg="white")
 rotulo_instrucao.pack()
-campo_cargo = tk.Entry(janela, font=('Arial', 12), width=30)
+campo_cargo = tk.Entry(janela, font=('Arial', 11), width=40, bg='white', fg='black', bd=2, relief='ridge')
 campo_cargo.pack(pady=10)  # Adicionar preenchimento vertical ao campo de entrada
 
-rotulo_instrucao = tk.Label(janela, text="E-mail", font=('Arial', 11), bg="white")
+rotulo_instrucao = tk.Label(janela, text="Email", font=('Arial', 11), bg="white")
 rotulo_instrucao.pack()
-campo_email = tk.Entry(janela, font=('Arial', 12), width=30)
+campo_email = tk.Entry(janela, font=('Arial', 11), width=40, bg='white', fg='black', bd=2, relief='ridge')
 campo_email.pack(pady=10)  # Adicionar preenchimento vertical ao campo de entrada
 
 rotulo_instrucao = tk.Label(janela, text="Telefone", font=('Arial', 11), bg="white")
 rotulo_instrucao.pack()
-campo_telefone = tk.Entry(janela, font=('Arial', 12), width=30)
+campo_telefone = tk.Entry(janela, font=('Arial', 11), width=40, bg='white', fg='black', bd=2, relief='ridge')
 campo_telefone.pack(pady=10)  # Adicionar preenchimento vertical ao campo de entrada
 
 def adicionar_texto():
+    global imagem_modificada
     texto_inserido_nome = campo_nome.get()  # Obter o texto inserido pelo usuário
     texto_inserido_cargo = campo_cargo.get()
     texto_inserido_email = campo_email.get()
@@ -162,41 +182,46 @@ def adicionar_texto():
     label_imagem.configure(image=imagem_tk)
     label_imagem.image = imagem_tk
     
+    # Atualizar a imagem modificada
+    imagem_modificada = imagem
+    
            
 # Criar o botão para adicionar o texto
 botao_adicionar = tk.Button(janela, text='Adicionar', command=adicionar_texto)
 botao_adicionar.pack(pady=10)
 botao_adicionar.configure(          # Define as propriedades do botão
-    font=('Arial', 12),              # Define a fonte
+    font=('Arial', 11),              # Define a fonte
     fg='black',                      # Define a cor do texto
     bg='white',                      # Define a cor de fundo
-    relief='flat',                   # Define o estilo de borda (por exemplo, 'flat', 'raised', 'sunken')
-    width=6                          # Define a largura do dropdown em caracteres
+    relief='ridge',                   # Define o estilo de borda (por exemplo, 'flat', 'raised', 'sunken')
+    width=8                          # Define a largura do dropdown em caracteres
 )    
 
 
 def salvar_imagem():
-        global contador, imagem
-        # Converter a imagem para o modo RGB
-        imagem = imagem.convert("RGB")
-        
+    global imagem_modificada
+    if imagem_modificada:
+        # Converta a imagem para o modo RGB, se necessário
+        imagem_salvar = imagem_modificada.convert("RGB")
+
         # Abrir o diálogo de seleção de diretório
         diretorio = filedialog.asksaveasfilename(defaultextension=".jpg")
-    
+
         if diretorio:
-        # Salvar a imagem modificada no diretório selecionado
-            imagem.save(diretorio)
-            print("Imagem salva com sucesso!")
+            # Salvar a imagem modificada no diretório selecionado
+            imagem_salvar.save(diretorio)
+            # Exibir mensagem de sucesso ao usuário
+            messagebox.showinfo("Sucesso", "Imagem salva com sucesso!")
 
 # Criar botão salvar imagem
 botao_salvar = tk.Button(janela, text="Salvar Imagem", command=salvar_imagem)
 botao_salvar.pack(side='bottom',padx=7, pady=7)
 botao_salvar.configure(
-    font=('Arial', 12),   # Define a fonte
+    font=('Arial', 11),   # Define a fonte
     fg='black',           # Define a cor do texto
     bg='white',           # Define a cor de fundo
-    relief='flat',        # Define o estilo de borda (por exemplo, 'flat', 'raised', 'sunken')
-    width=10              # Define a largura do dropdown em caracteres)
+    relief='ridge',        # Define o estilo de borda (por exemplo, 'flat', 'raised', 'sunken')
+    width=12              # Define a largura do dropdown em caracteres)
 ) 
 
 #Criar botão nova assinatura
