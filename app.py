@@ -1,6 +1,6 @@
 import tkinter as tk
-import os
-import win32com.client
+#import os
+#import win32com.client
 from tkinter import filedialog, messagebox
 from PIL import Image, ImageTk, ImageDraw, ImageFont, ImageOps
 
@@ -223,6 +223,7 @@ botao_salvar.configure(
     relief='ridge',        # Define o estilo de borda (por exemplo, 'flat', 'raised', 'sunken')
     width=12              # Define a largura do dropdown em caracteres)
 ) 
+
 
 #Criar botão nova assinatura
 
