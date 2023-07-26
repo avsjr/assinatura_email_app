@@ -232,3 +232,5 @@ label_imagem = tk.Label(janela)
 label_imagem.pack()
 
 janela.mainloop()
+
+##
