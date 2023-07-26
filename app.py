@@ -4,11 +4,14 @@ import tkinter as tk
 from tkinter import filedialog, messagebox
 from PIL import Image, ImageTk, ImageDraw, ImageFont, ImageOps
 
+CAMINHO_IMAGEM_MASTERLINE = 'img/01-masterline.png'
+CAMINHO_IMAGEM_PLATINA = 'img/02-platina.png'
+
 # Dicionário de opções e imagens correspondentes
 opcoes = {
-    'Platina CSC': 'img/02-platina.png',
-    'Platina LOG': 'img/02-platina.png',
-    'Masterline': 'img/01-masterline.png'
+    'Platina CSC': 'CAMINHO_IMAGEM_PLATINA',
+    'Platina LOG': 'CAMINHO_IMAGEM_PLATINA',
+    'Masterline': 'CAMINHO_IMAGEM_MASTERLINE'
 }
 
 # Função para selecionar a opção do dropdown
@@ -148,7 +151,7 @@ def adicionar_texto():
     cor_email_telefone = (3,3,3)
     cor_endereco = (3,3,3)
     
-    if caminho_imagem == 'img/01-masterline.png':
+    if caminho_imagem == CAMINHO_IMAGEM_MASTERLINE:
         posicao_endereco = (210, 126)  # Definir a posição do endereço masterline
         desenho.text(posicao_endereco, endereco_masterline, font=fonte_endereco, fill=cor_endereco)
         
@@ -157,7 +160,7 @@ def adicionar_texto():
         desenho.text(posicao_endereco, endereco_platina, font=fonte_endereco, fill=cor_endereco)
           
     # condição para a posição do texto
-    if caminho_imagem == 'img/01-masterline.png':
+    if caminho_imagem == CAMINHO_IMAGEM_MASTERLINE:
         posicao_nome = (210, 18)  # Definir a posição do texto na imagem
         desenho.text(posicao_nome, texto_nome, font=fonte_atributos, fill=cor_nome_cargo)
         posicao_cargo = (210, 38)  # Definir a posição do texto na imagem
