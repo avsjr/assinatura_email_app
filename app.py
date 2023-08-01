@@ -223,7 +223,7 @@ botao_salvar.configure(
     font=('Arial', 11),   # Define a fonte
     fg='black',           # Define a cor do texto
     bg='white',           # Define a cor de fundo
-    relief='ridge',        # Define o estilo de borda (por exemplo, 'flat', 'raised', 'sunken')
+    relief='ridge',       # Define o estilo de borda (por exemplo, 'flat', 'raised', 'sunken')
     width=12              # Define a largura do dropdown em caracteres)
 ) 
 
@@ -235,5 +235,3 @@ label_imagem = tk.Label(janela)
 label_imagem.pack()
 
 janela.mainloop()
-
-##
