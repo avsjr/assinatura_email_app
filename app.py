@@ -9,9 +9,9 @@ CAMINHO_IMAGEM_PLATINA = 'img/02-platina.png'
 
 # Dicionário de opções e imagens correspondentes
 opcoes = {
-    'Platina CSC': 'CAMINHO_IMAGEM_PLATINA',
-    'Platina LOG': 'CAMINHO_IMAGEM_PLATINA',
-    'Masterline': 'CAMINHO_IMAGEM_MASTERLINE'
+    'Platina CSC': 'img/02-platina.png',
+    'Platina LOG': 'img/02-platina.png',
+    'Masterline': 'img/01-masterline.png'
 }
 
 # Função para selecionar a opção do dropdown
