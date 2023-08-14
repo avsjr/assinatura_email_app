@@ -1,21 +1,20 @@
 import tkinter as tk
-#import os
-#import win32com.client
 from tkinter import filedialog, messagebox
 from PIL import Image, ImageTk, ImageDraw, ImageFont, ImageOps
 
-CAMINHO_IMAGEM_MASTERLINE = 'img/01-masterline.png'
-CAMINHO_IMAGEM_PLATINA = 'img/02-platina.png'
+# Definição de constantes
+IMG_ML = 'img/01-masterline.png'
+IMG_PL = 'img/02-platina.png'
 
 # Dicionário de opções e imagens correspondentes
 opcoes = {
-    'Platina CSC': 'img/02-platina.png',
-    'Platina LOG': 'img/02-platina.png',
-    'Masterline': 'img/01-masterline.png'
+    'Platina CSC': IMG_PL,
+    'Platina LOG': IMG_PL,
+    'Masterline': IMG_ML
 }
 
 # Função para selecionar a opção do dropdown
-def selecionar_opcao():
+def selecionar_opcao(*args):
     global imagem
     opcao_selecionada = dropdown.get()
     caminho_imagem = opcoes[opcao_selecionada]
@@ -26,26 +25,10 @@ def selecionar_opcao():
 
 # Criar a janela principal
 janela = tk.Tk()
-janela.title('Assinaturas')    # Define o título da janela
-janela.geometry('700x700')     # Define o tamanho da janela
-janela.configure(bg='white')   # Define a cor de fundo da janela como branco
+janela.title('Assinaturas')
+janela.geometry('700x700')
+janela.configure(bg='white')
 janela.iconbitmap('img/skala.ico')  # Define o ícone da janela
-
-'''
-# Função para criar o atalho e definir o ícone
-def criar_atalho():
-    caminho_icone = "img/skala.ico"  # Substitua pelo caminho real para o arquivo .ico
-
-    # Criação do atalho
-    shell = win32com.client.Dispatch("WScript.Shell")
-    atalho = shell.CreateShortCut("atalho.lnk")
-    atalho.Targetpath = os.path.abspath("caminho_para_seu_aplicativo.exe")  # Substitua pelo caminho real para o seu aplicativo .exe
-    atalho.IconLocation = caminho_icone
-    atalho.save()
-
-# Chamar a função para criar o atalho e definir o ícone
-criar_atalho()
-'''
 
 # Carregar a imagem do ícone e convertê-la para o formato adequado
 icone = Image.open('img/skala.ico')
@@ -86,16 +69,8 @@ opcoes_menu['menu'].configure(
     relief='ridge',        # Define o estilo de borda (por exemplo, 'flat', 'raised', 'sunken')
 )
 
-# Criar o botão de seleção
-botao_selecionar = tk.Button(janela, text='OK', command=selecionar_opcao)
-botao_selecionar.place(x=450, y=8)  # Define a posição do botão na janela
-botao_selecionar.configure(          # Define as propriedades do botão
-    font=('Arial', 11),              # Define a fonte
-    fg='black',                      # Define a cor do texto
-    bg='white',                      # Define a cor de fundo
-    relief='ridge',                   # Define o estilo de borda (por exemplo, 'flat', 'raised', 'sunken')
-    width=2                          # Define a largura do dropdown em caracteres
-)
+# Associar a função selecionar_opcao() ao evento de mudança da variável do dropdown
+dropdown.trace("w", selecionar_opcao)
 
 # Criar o campo de entrada de texto
 rotulo_instrucao = tk.Label(janela, text="Nome", font=('Arial', 11), bg="white")
@@ -143,15 +118,15 @@ def adicionar_texto():
     # Definir a fonte e o tamanho do texto
     tamanho_fonte = 15
     
-    fonte_atributos = ImageFont.truetype('fonts/arial.ttf', tamanho_fonte)
-    fonte_endereco = ImageFont.truetype('fonts/arial.ttf', tamanho_fonte,)
+    fonte_atributos = ImageFont.truetype('fonts/ReemKufi-Regular.ttf', tamanho_fonte)
+    fonte_endereco = ImageFont.truetype('fonts/ReemKufi-Regular.ttf', tamanho_fonte,)
     
     # Definir a cor do texto
     cor_nome_cargo = (162,205,90)
     cor_email_telefone = (3,3,3)
     cor_endereco = (3,3,3)
     
-    if caminho_imagem == CAMINHO_IMAGEM_MASTERLINE:
+    if caminho_imagem == IMG_ML:
         posicao_endereco = (210, 126)  # Definir a posição do endereço masterline
         desenho.text(posicao_endereco, endereco_masterline, font=fonte_endereco, fill=cor_endereco)
         
@@ -160,7 +135,7 @@ def adicionar_texto():
         desenho.text(posicao_endereco, endereco_platina, font=fonte_endereco, fill=cor_endereco)
           
     # condição para a posição do texto
-    if caminho_imagem == CAMINHO_IMAGEM_MASTERLINE:
+    if caminho_imagem == IMG_ML:
         posicao_nome = (210, 18)  # Definir a posição do texto na imagem
         desenho.text(posicao_nome, texto_nome, font=fonte_atributos, fill=cor_nome_cargo)
         posicao_cargo = (210, 38)  # Definir a posição do texto na imagem
