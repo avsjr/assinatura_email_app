@@ -88,17 +88,23 @@ rotulo_instrucao.pack()
 campo_email = tk.Entry(janela, font=('Arial', 11), width=40, bg='white', fg='black', bd=2, relief='ridge')
 campo_email.pack(pady=10)  # Adicionar preenchimento vertical ao campo de entrada
 
-rotulo_instrucao = tk.Label(janela, text="Telefone", font=('Arial', 11), bg="white")
+rotulo_instrucao = tk.Label(janela, text="Telefone Fixo", font=('Arial', 11), bg="white")
 rotulo_instrucao.pack()
-campo_telefone = tk.Entry(janela, font=('Arial', 11), width=40, bg='white', fg='black', bd=2, relief='ridge')
-campo_telefone.pack(pady=10)  # Adicionar preenchimento vertical ao campo de entrada
+campo_telefone_fixo = tk.Entry(janela, font=('Arial', 11), width=40, bg='white', fg='black', bd=2, relief='ridge')
+campo_telefone_fixo.pack(pady=10)  # Adicionar preenchimento vertical ao campo de entrada
+
+rotulo_instrucao = tk.Label(janela, text="Telefone Móvel (opcional)", font=('Arial', 11), bg="white")
+rotulo_instrucao.pack()
+campo_telefone_movel = tk.Entry(janela, font=('Arial', 11), width=40, bg='white', fg='black', bd=2, relief='ridge')
+campo_telefone_movel.pack(pady=10)  # Adicionar preenchimento vertical ao campo de entrada
 
 def adicionar_texto():
     global imagem_modificada
     texto_inserido_nome = campo_nome.get()  # Obter o texto inserido pelo usuário
     texto_inserido_cargo = campo_cargo.get()
     texto_inserido_email = campo_email.get()
-    texto_inserido_telefone = campo_telefone.get()
+    texto_inserido_telefone_fixo = campo_telefone_fixo.get()
+    texto_inserido_telefone_movel = campo_telefone_movel.get()
     
     # Carregar a imagem
     caminho_imagem = opcoes[dropdown.get()]  # Obter o caminho da imagem selecionada
@@ -111,7 +117,8 @@ def adicionar_texto():
     texto_nome = texto_inserido_nome
     texto_cargo = texto_inserido_cargo
     texto_email = texto_inserido_email
-    texto_telefone = texto_inserido_telefone
+    texto_telefone_fixo = texto_inserido_telefone_fixo
+    texto_telefone_movel = texto_inserido_telefone_movel
     endereco_platina = 'Comercial Ilhas do Sol\nRua Coronel Antonio Rios, 1097 - Salas 201 a 208\nUberaba/MG'
     endereco_masterline = 'Rua Verissímo, 265\nSão Benedito - Uberaba/MG\nCEP: 38020-310'
     
@@ -142,8 +149,10 @@ def adicionar_texto():
         desenho.text(posicao_cargo, texto_cargo, font=fonte_atributos, fill=cor_nome_cargo)
         posicao_email = (210, 58)  # Definir a posição do texto na imagem
         desenho.text(posicao_email, texto_email, font=fonte_atributos, fill=cor_email_telefone)
-        posicao_telefone = (210, 78)  # Definir a posição do texto na imagem
-        desenho.text(posicao_telefone, texto_telefone, font=fonte_atributos, fill=cor_email_telefone)
+        posicao_telefone_fixo = (210, 78)  # Definir a posição do texto na imagem
+        desenho.text(posicao_telefone_fixo, texto_telefone_fixo, font=fonte_atributos, fill=cor_email_telefone)
+        posicao_telefone_movel = (210, 160)  # Definir a posição do texto na imagem
+        desenho.text(posicao_telefone_movel, texto_telefone_movel, font=fonte_atributos, fill=cor_email_telefone)
     else:
         posicao_nome = (192, 18)  # Definir a posição do texto na imagem
         desenho.text(posicao_nome, texto_nome, font=fonte_atributos, fill=cor_nome_cargo)
@@ -151,8 +160,10 @@ def adicionar_texto():
         desenho.text(posicao_cargo, texto_cargo, font=fonte_atributos, fill=cor_nome_cargo)
         posicao_email = (192, 58)  # Definir a posição do texto na imagem
         desenho.text(posicao_email, texto_email, font=fonte_atributos, fill=cor_email_telefone)
-        posicao_telefone = (192, 78)  # Definir a posição do texto na imagem
-        desenho.text(posicao_telefone, texto_telefone, font=fonte_atributos, fill=cor_email_telefone)
+        posicao_telefone_fixo = (192, 78)  # Definir a posição do texto na imagem
+        desenho.text(posicao_telefone_fixo, texto_telefone_fixo, font=fonte_atributos, fill=cor_email_telefone)
+        posicao_telefone_movel = (192, 160)  # Definir a posição do texto na imagem
+        desenho.text(posicao_telefone_movel, texto_telefone_movel, font=fonte_atributos, fill=cor_email_telefone)
 
     # Atualizar a imagem exibida no rótulo label_imagem
     
