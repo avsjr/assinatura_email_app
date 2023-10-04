@@ -22,11 +22,16 @@ def selecionar_opcao(*args):
     imagem_tk = ImageTk.PhotoImage(imagem)
     label_imagem.configure(image=imagem_tk)
     label_imagem.image = imagem_tk
-
+    
+    if caminho_imagem == IMG_ML:
+        campo_email.insert(0, '@masterline.ind.br')
+    else:
+        campo_email.insert(0, '@platinacsc.com.br')
+    
 # Criar a janela principal
 janela = tk.Tk()
 janela.title('Assinaturas')
-janela.geometry('700x700')
+janela.geometry('800x800')
 janela.configure(bg='white')
 janela.iconbitmap('img/skala.ico')  # Define o ícone da janela
 
@@ -54,16 +59,17 @@ opcoes_menu = tk.OptionMenu(janela, dropdown, *opcoes.keys())
 # Definir as propriedades do dropdown
 opcoes_menu.pack(side='top', padx=7, pady=7)
 opcoes_menu.configure(
-    font=('Arial', 11),   # Define a fonte
+    font=('Arial', 10),   # Define a fonte
     fg='black',           # Define a cor do texto
     bg='white',           # Define a cor de fundo
     relief='ridge',        # Define o estilo de borda (por exemplo, 'flat', 'raised', 'sunken')
-    width=15              # Define a largura do dropdown em caracteres
+    width=15,              # Define a largura do dropdown em caracteres
+    bd=1
 )
 
 # Definir as propriedades do menu suspenso
 opcoes_menu['menu'].configure(
-    font=('Arial', 11),   # Define a fonte do menu suspenso
+    font=('Arial', 10),   # Define a fonte do menu suspenso
     fg='black',           # Define a cor do texto no menu suspenso
     bg='white',           # Define a cor de fundo do menu suspenso
     relief='ridge',        # Define o estilo de borda (por exemplo, 'flat', 'raised', 'sunken')
@@ -73,30 +79,30 @@ opcoes_menu['menu'].configure(
 dropdown.trace("w", selecionar_opcao)
 
 # Criar o campo de entrada de texto
-rotulo_instrucao = tk.Label(janela, text="Nome", font=('Arial', 11), bg="white")
+rotulo_instrucao = tk.Label(janela, text="Nome", font=('Arial', 10), bg="white")
 rotulo_instrucao.pack()
-campo_nome = tk.Entry(janela, font=('Arial', 11), width=40, bg='white', fg='black', bd=2, relief='ridge')
+campo_nome = tk.Entry(janela, font=('Arial', 11), width=40, bg='white', fg='black', bd=1, relief='ridge')
 campo_nome.pack(pady=10)  # Adicionar preenchimento vertical ao campo de entrada
 
-rotulo_instrucao = tk.Label(janela, text="Cargo", font=('Arial', 11), bg="white")
+rotulo_instrucao = tk.Label(janela, text="Cargo", font=('Arial', 10), bg="white")
 rotulo_instrucao.pack()
-campo_cargo = tk.Entry(janela, font=('Arial', 11), width=40, bg='white', fg='black', bd=2, relief='ridge')
+campo_cargo = tk.Entry(janela, font=('Arial', 11), width=40, bg='white', fg='black', bd=1, relief='ridge')
 campo_cargo.pack(pady=10)  # Adicionar preenchimento vertical ao campo de entrada
 
-rotulo_instrucao = tk.Label(janela, text="Email", font=('Arial', 11), bg="white")
+rotulo_instrucao = tk.Label(janela, text="Email", font=('Arial', 10), bg="white")
 rotulo_instrucao.pack()
-campo_email = tk.Entry(janela, font=('Arial', 11), width=40, bg='white', fg='black', bd=2, relief='ridge')
+campo_email = tk.Entry(janela, font=('Arial', 11), width=40, bg='white', fg='black', bd=1, relief='ridge')
 campo_email.pack(pady=10)  # Adicionar preenchimento vertical ao campo de entrada
 
-rotulo_instrucao = tk.Label(janela, text="Telefone Fixo", font=('Arial', 11), bg="white")
+rotulo_instrucao = tk.Label(janela, text="Telefone Fixo", font=('Arial', 10), bg="white")
 rotulo_instrucao.pack()
-campo_telefone_fixo = tk.Entry(janela, font=('Arial', 11), width=40, bg='white', fg='black', bd=2, relief='ridge')
-campo_telefone_fixo.pack(pady=10)  # Adicionar preenchimento vertical ao campo de entrada
+campo_telefone_fixo = tk.Entry(janela, font=('Arial', 11), width=40, bg='white', fg='black', bd=1, relief='ridge')
+campo_telefone_fixo.pack(pady=10)
 
-rotulo_instrucao = tk.Label(janela, text="Telefone Móvel (opcional)", font=('Arial', 11), bg="white")
+rotulo_instrucao = tk.Label(janela, text="Telefone Móvel (opcional)", font=('Arial', 10), bg="white")
 rotulo_instrucao.pack()
-campo_telefone_movel = tk.Entry(janela, font=('Arial', 11), width=40, bg='white', fg='black', bd=2, relief='ridge')
-campo_telefone_movel.pack(pady=10)  # Adicionar preenchimento vertical ao campo de entrada
+campo_telefone_movel = tk.Entry(janela, font=('Arial', 11), width=40, bg='white', fg='black', bd=1, relief='ridge')
+campo_telefone_movel.pack(pady=10)
 
 def adicionar_texto():
     global imagem_modificada
@@ -125,8 +131,8 @@ def adicionar_texto():
     # Definir a fonte e o tamanho do texto
     tamanho_fonte = 15
     
-    fonte_atributos = ImageFont.truetype('fonts/ReemKufi-Regular.ttf', tamanho_fonte)
-    fonte_endereco = ImageFont.truetype('fonts/ReemKufi-Regular.ttf', tamanho_fonte,)
+    fonte_atributos = ImageFont.truetype('fonts/Raleway/Raleway-Regular.ttf', tamanho_fonte)
+    fonte_endereco = ImageFont.truetype('fonts/Raleway/Raleway-Regular.ttf', tamanho_fonte,)
     
     # Definir a cor do texto
     cor_nome_cargo = (162,205,90)
@@ -134,12 +140,13 @@ def adicionar_texto():
     cor_endereco = (3,3,3)
     
     if caminho_imagem == IMG_ML:
-        posicao_endereco = (210, 126)  # Definir a posição do endereço masterline
+        posicao_endereco = (203, 126)  # Definir a posição do endereço masterline
         desenho.text(posicao_endereco, endereco_masterline, font=fonte_endereco, fill=cor_endereco)
         
     else:
-        posicao_endereco = (192, 126)  # Definir a posição do endereço platina
+        posicao_endereco = (185, 126)  # Definir a posição do endereço platina
         desenho.text(posicao_endereco, endereco_platina, font=fonte_endereco, fill=cor_endereco)
+        campo_email.insert(0, '@platinacsc.com.br')
           
     # condição para a posição do texto
     if caminho_imagem == IMG_ML:
@@ -151,7 +158,7 @@ def adicionar_texto():
         desenho.text(posicao_email, texto_email, font=fonte_atributos, fill=cor_email_telefone)
         posicao_telefone_fixo = (210, 78)  # Definir a posição do texto na imagem
         desenho.text(posicao_telefone_fixo, texto_telefone_fixo, font=fonte_atributos, fill=cor_email_telefone)
-        posicao_telefone_movel = (210, 160)  # Definir a posição do texto na imagem
+        posicao_telefone_movel = (350, 78)  # Definir a posição do texto na imagem
         desenho.text(posicao_telefone_movel, texto_telefone_movel, font=fonte_atributos, fill=cor_email_telefone)
     else:
         posicao_nome = (192, 18)  # Definir a posição do texto na imagem
@@ -162,7 +169,7 @@ def adicionar_texto():
         desenho.text(posicao_email, texto_email, font=fonte_atributos, fill=cor_email_telefone)
         posicao_telefone_fixo = (192, 78)  # Definir a posição do texto na imagem
         desenho.text(posicao_telefone_fixo, texto_telefone_fixo, font=fonte_atributos, fill=cor_email_telefone)
-        posicao_telefone_movel = (192, 160)  # Definir a posição do texto na imagem
+        posicao_telefone_movel = (330, 78)  # Definir a posição do texto na imagem
         desenho.text(posicao_telefone_movel, texto_telefone_movel, font=fonte_atributos, fill=cor_email_telefone)
 
     # Atualizar a imagem exibida no rótulo label_imagem
@@ -179,13 +186,32 @@ def adicionar_texto():
 botao_adicionar = tk.Button(janela, text='Adicionar', command=adicionar_texto)
 botao_adicionar.pack(pady=10)
 botao_adicionar.configure(          # Define as propriedades do botão
-    font=('Arial', 11),              # Define a fonte
+    font=('Arial', 10),              # Define a fonte
     fg='black',                      # Define a cor do texto
     bg='white',                      # Define a cor de fundo
     relief='ridge',                   # Define o estilo de borda (por exemplo, 'flat', 'raised', 'sunken')
     width=8                          # Define a largura do dropdown em caracteres
 )    
 
+# Função para limpar todos os campos
+def limpar_campos():
+    campo_nome.delete(0, 'end')  # Limpa o campo de Nome
+    campo_cargo.delete(0, 'end')  # Limpa o campo de Cargo
+    campo_email.delete(0, 'end')  # Limpa o campo de Email
+    campo_telefone_fixo.delete(0, 'end')  # Limpa o campo de Telefone Fixo
+    campo_telefone_movel.delete(0, 'end')  # Limpa o campo de Telefone Móvel
+    dropdown.set('Escolha a Unidade')  # Define a opção padrão no dropdown
+
+# Criar o botão para limpar todos os campos
+botao_limpar = tk.Button(janela, text='Limpar Campos', command=limpar_campos)
+botao_limpar.pack(pady=10)
+botao_limpar.configure(          # Define as propriedades do botão
+    font=('Arial', 10),              # Define a fonte
+    fg='black',                      # Define a cor do texto
+    bg='white',                      # Define a cor de fundo
+    relief='ridge',                   # Define o estilo de borda (por exemplo, 'flat', 'raised', 'sunken')
+    width=11                          # Define a largura do botão em caracteres
+)
 
 def salvar_imagem():
     global imagem_modificada
@@ -194,7 +220,7 @@ def salvar_imagem():
         imagem_salvar = imagem_modificada.convert("RGB")
 
         # Abrir o diálogo de seleção de diretório
-        diretorio = filedialog.asksaveasfilename(defaultextension=".jpg")
+        diretorio = filedialog.asksaveasfilename(defaultextension=".jpeg", filetypes=[("JPEG", ".jpeg"), ("PNG", ".png")], title="Salvar Imagem")
 
         if diretorio:
             # Salvar a imagem modificada no diretório selecionado
@@ -206,15 +232,12 @@ def salvar_imagem():
 botao_salvar = tk.Button(janela, text="Salvar Imagem", command=salvar_imagem)
 botao_salvar.pack(side='bottom',padx=7, pady=7)
 botao_salvar.configure(
-    font=('Arial', 11),   # Define a fonte
+    font=('Arial', 10),   # Define a fonte
     fg='black',           # Define a cor do texto
     bg='white',           # Define a cor de fundo
     relief='ridge',       # Define o estilo de borda (por exemplo, 'flat', 'raised', 'sunken')
-    width=12              # Define a largura do dropdown em caracteres)
+    width=11              # Define a largura do dropdown em caracteres)
 ) 
-
-
-#Criar botão nova assinatura
 
 # Criar o rótulo para a imagem
 label_imagem = tk.Label(janela)
