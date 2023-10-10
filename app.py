@@ -132,7 +132,7 @@ def adicionar_texto():
     tamanho_fonte = 15
     
     fonte_atributos = ImageFont.truetype('fonts/josefins/JosefinSans-Regular.ttf', tamanho_fonte)
-    fonte_endereco = ImageFont.truetype('fonts/josefins/JosefinSans-Regular.ttf', tamanho_fonte,)
+    fonte_endereco = ImageFont.truetype('fonts/josefins/JosefinSans-Regular.ttf', tamanho_fonte)
     
     # Definir a cor do texto
     cor_nome_cargo = (162,205,90)
